@@ -1,23 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSearchParams } from "react-router-dom"; 
 import { SunIcon, MoonIcon, MenuIcon, XIcon } from "@heroicons/react/outline";
 import clsx from "clsx";
 import App from "./App";
 
 // Example custom components
 const SectionOne = () => <h1 className="text-2xl">🧩 Component for Section 1</h1>;
-const SectionTwo = () => <h1 className="text-2xl">🚀 Component for Section 2</h1>;
+const SectionContentPlaceHolder = () => <h1 className="text-2xl">🚀 Component for Sections</h1>;
 const Placeholder = ({ label }) => <h1 className="text-2xl">Put your component here for {label}</h1>;
 
 // Sections
 const sections = [
   { key: "section-1", label: "App1", component: <App /> },
-  { key: "section-2", label: "Section 2", component: <SectionTwo /> },
-  { key: "section-3", label: "Section 3", component: <SectionTwo /> },
-  { key: "section-4", label: "Section 4", component: <SectionTwo /> },
-  { key: "section-5", label: "Section 5", component: <SectionTwo /> },
+  { key: "section-2", label: "Section 2", component: <SectionContentPlaceHolder /> },
+  { key: "section-3", label: "Section 3", component: <SectionContentPlaceHolder /> },
+  { key: "section-4", label: "Section 4", component: <SectionContentPlaceHolder /> },
+  { key: "section-5", label: "Section 5", component: <SectionContentPlaceHolder /> },
   ...Array.from({ length: 20 }, (_, i) => {
-    const index = i + 6;
+    const index = i + 5;
     return {
       key: `section-${index}`,
       label: `Section ${index}`,
@@ -27,7 +28,17 @@ const sections = [
 ];
 
 export default function SidebarTabs() {
-  const [activeTab, setActiveTab] = useState(sections[0].key);
+
+  const getInitialTab = () => {
+    const params = new URLSearchParams(window.location.search);
+    const sectionFromURL = params.get("section");
+    if (sectionFromURL && sections.some(s => s.key === sectionFromURL)) {
+      return sectionFromURL;
+    }
+    return sections[0].key;
+  };
+  
+  const [activeTab, setActiveTab] = useState(getInitialTab);
   const [searchTerm, setSearchTerm] = useState("");
   const [theme, setTheme] = useState("light");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -42,6 +53,23 @@ export default function SidebarTabs() {
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
+
+  // Set activeTab from URL or default
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const sectionFromURL = params.get("section");
+
+    if (sectionFromURL && sections.some(s => s.key === sectionFromURL)) {
+      setActiveTab(sectionFromURL);
+    }
+  }, []);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    params.set("section", activeTab);
+    const newUrl = `${window.location.pathname}?${params.toString()}`;
+    window.history.replaceState({}, "", newUrl);
+  }, [activeTab]);
 
   return (
     <div className="flex h-screen bg-white dark:bg-gray-950 text-gray-800 dark:text-white transition-colors">
@@ -93,30 +121,43 @@ export default function SidebarTabs() {
               layoutId="underline"
               className="absolute left-0 h-10 bg-gray-700 w-full rounded-md z-0"
               style={{
-                top:
-                  filteredSections.findIndex((s) => s.key === activeTab) * 42,
+                top: filteredSections.findIndex((s) => s.key === activeTab) * 42,
               }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
             />
           </div>
 
           <div className="relative z-10 space-y-1 px-2 py-1">
-            {filteredSections.map((section) => (
-              <button
-                key={section.key}
-                className={`relative text-left w-full px-4 py-2 rounded transition-colors duration-200 ${
-                  activeTab === section.key
-                    ? "text-white font-medium"
-                    : "hover:bg-gray-700 text-gray-300"
-                }`}
-                onClick={() => {
-                  setActiveTab(section.key);
-                  setSidebarOpen(false);
-                }}
-              >
-                {section.label}
-              </button>
-            ))}
+          {filteredSections.map((section) => {
+  const isActive = activeTab === section.key;
+
+  return (
+    <button
+      key={section.key}
+      className={clsx(
+        "relative text-left w-full px-4 py-2 rounded transition-colors duration-200 overflow-hidden",
+        isActive ? "text-white font-medium" : "hover:bg-gray-700 text-gray-300"
+      )}
+      onClick={() => {
+        setActiveTab(section.key);
+        setSidebarOpen(false);
+      }}
+    >
+      {/* Sliding background */}
+      {isActive && (
+        <motion.div
+          layoutId="underline"
+          className="absolute inset-0 bg-gray-700 rounded-md z-0"
+          transition={{ type: "spring", stiffness: 500, damping: 30 }}
+        />
+      )}
+
+      {/* Label stays on top */}
+      <span className="relative z-10">{section.label}</span>
+    </button>
+  );
+})}
+
           </div>
         </div>
 
