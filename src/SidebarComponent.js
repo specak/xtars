@@ -29,6 +29,12 @@ const sections = [
 
 export default function SidebarTabs() {
 
+  
+  useEffect(() => {
+    document.title = "Xtars App";
+  }, []);
+
+  
   const getInitialTab = () => {
     const params = new URLSearchParams(window.location.search);
     const sectionFromURL = params.get("section");
