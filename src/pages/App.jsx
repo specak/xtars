@@ -104,7 +104,7 @@ const App = () => {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="light" enableSystem={true}>
-      <Router>
+      <Router basename="xtars">
         <Routes>
           <Route path="/" element={<DashboardHome theme={theme} setTheme={setTheme} />} />
           <Route path="/concept1" element={<TopicCard />} />
