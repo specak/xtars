@@ -1,113 +1,102 @@
-import { useState } from "react";
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import {
+  Lightbulb,
+  HelpCircle,
+  Layers,
+  Users,
+  BookOpenCheck,
+} from 'lucide-react';
 
-console.log("LearningPage component rendered");
+// Import section components
+import What from './LinearArrangement/WhatPage.jsx';
+import Why from './LinearArrangement/WhyPage.jsx';
+import ConceptPage from './LinearArrangement/ConceptPage.jsx';
+// import Solve from './Solve';
+// import Practice from './Practice';
 
-export default function LearningPage() {
-  const whatCards = [
-    { title: "Definition", desc: "Understand what the concept means in simple terms." },
-    { title: "Real-World Relevance", desc: "Discover how it applies in practical scenarios." },
-  ];
+const sectionData = [
+  {
+    key: 'what',
+    title: 'What',
+    emoji: '💡',
+    icon: <Lightbulb className="w-5 h-5 mr-2" />,
+  },
+  {
+    key: 'why',
+    title: 'Why',
+    emoji: '❓',
+    icon: <HelpCircle className="w-5 h-5 mr-2" />,
+  },
+  {
+    key: 'concepts',
+    title: 'Concepts',
+    emoji: '📚',
+    icon: <Layers className="w-5 h-5 mr-2" />,
+  },
+  {
+    key: 'solve',
+    title: 'Solve with Us',
+    emoji: '🤝',
+    icon: <Users className="w-5 h-5 mr-2" />,
+  },
+  {
+    key: 'practice',
+    title: 'Practice',
+    emoji: '🧠',
+    icon: <BookOpenCheck className="w-5 h-5 mr-2" />,
+  },
+];
 
-  const whyCards = [
-    { title: "Importance", desc: "Why should you care about this topic?" },
-    { title: "Benefits", desc: "How mastering it helps you in real-life situations or exams." },
-  ];
+const LearningModule = () => {
+  const [activeSection, setActiveSection] = useState('what');
 
-  const conceptModules = [
-    { name: "Module A", content: "This is Module A's content." },
-    { name: "Module B", content: "This is Module B's content." },
-    { name: "Module C", content: "This is Module C's content." },
-  ];
-
-  const practiceLevels = ["Level 1", "Level 2", "Level 3"];
-  const [selectedModule, setSelectedModule] = useState(null);
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'what':
+        return <What />;
+      case 'why':
+        return <Why />;
+      case 'concepts':
+        return <ConceptPage />;
+      // case 'solve':
+      //   return <Solve />;
+      // case 'practice':
+      //   return <Practice />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black text-white px-6 py-12 space-y-16">
-      {/* What Section */}
-      <section>
-        <h2 className="text-3xl font-bold mb-6">What</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {whatCards.map((card, i) => (
-            <div
-              key={i}
-              className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow"
-            >
-              <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
-              <p className="text-gray-300">{card.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6">
+      <h1 className="text-3xl font-bold mb-6">Explore the Module</h1>
 
-      {/* Why Section */}
-      <section>
-        <h2 className="text-3xl font-bold mb-6">Why</h2>
-        <div className="grid md:grid-cols-2 gap-6">
-          {whyCards.map((card, i) => (
-            <div
-              key={i}
-              className="bg-white/10 backdrop-blur-lg p-6 rounded-2xl border border-white/20 shadow"
-            >
-              <h3 className="text-xl font-semibold mb-2">{card.title}</h3>
-              <p className="text-gray-300">{card.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+      {/* Horizontal Cards with Section State Switch */}
+      <div className="flex flex-wrap md:flex-nowrap gap-4 overflow-x-auto mb-8">
+        {sectionData.map(({ key, title, emoji }) => (
+          <motion.button
+            key={key}
+            onClick={() => setActiveSection(key)}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.98 }}
+            className={`flex items-center justify-center min-w-[160px] flex-1 px-6 py-4 rounded-xl text-lg font-semibold shadow-lg transition ${
+              activeSection === key
+                ? 'bg-white/20 text-yellow-300'
+                : 'bg-white/10 hover:bg-white/20'
+            }`}
+          >
+            <span className="mr-2 text-xl">{emoji}</span> {title}
+          </motion.button>
+        ))}
+      </div>
 
-      {/* Concepts Section */}
-      <section>
-        <h2 className="text-3xl font-bold mb-6">Concepts</h2>
-        <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 mb-6">
-          {conceptModules.map((mod, i) => (
-            <button
-              key={i}
-              onClick={() => setSelectedModule(mod)}
-              className={`p-6 rounded-xl text-left border border-white/20 bg-white/10 hover:bg-white/20 transition ${
-                selectedModule?.name === mod.name ? "ring-2 ring-orange-400" : ""
-              }`}
-            >
-              <h4 className="font-medium text-lg">{mod.name}</h4>
-              <p className="text-sm text-gray-400 mt-2">Click to view content</p>
-            </button>
-          ))}
-        </div>
-
-        {selectedModule && (
-          <div className="bg-white/5 p-6 rounded-xl border border-white/10">
-            <h4 className="text-xl font-semibold mb-2">{selectedModule.name}</h4>
-            <p className="text-gray-300">{selectedModule.content}</p>
-          </div>
-        )}
-      </section>
-
-      {/* Practice Questions Section */}
-      <section>
-        <h2 className="text-3xl font-bold mb-6">Practice Questions</h2>
-        <div className="grid sm:grid-cols-3 gap-6">
-          {practiceLevels.map((level, i) => (
-            <div
-              key={i}
-              className="p-6 rounded-2xl bg-white/10 border border-white/20 hover:bg-white/20 transition"
-            >
-              <h4 className="text-xl font-bold">{level}</h4>
-              <p className="text-gray-400 mt-2">Practice questions for {level} difficulty.</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Solve With Us Section */}
-      <section>
-        <h2 className="text-3xl font-bold mb-6">Solve With Us</h2>
-        <div className="bg-orange-500 text-black p-8 rounded-2xl shadow-xl max-w-2xl mx-auto text-center">
-          <h3 className="text-2xl font-bold mb-2">Solve with Us!</h3>
-          <p className="text-lg">
-            Join our live sessions or community challenges and solve questions together in real time.
-          </p>
-        </div>
-      </section>
+      {/* Section Renderer Below Cards */}
+      <div className="bg-white/5 p-6 rounded-xl shadow-inner">
+        {renderSection()}
+      </div>
     </div>
   );
-}
+};
+
+export default LearningModule;
