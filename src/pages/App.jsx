@@ -15,6 +15,11 @@ import Onboarding from '../components/Onboarding';
 import Footer from '../components/Footer.jsx';
 import TopicCard from './TopicCard.jsx';
 import LearningPage from './LearningPage.jsx';
+import WhatPage from './LinearArrangement/WhatPage.jsx';
+import WhyPage from './LinearArrangement/WhyPage.jsx';
+import ConceptPage from './LinearArrangement/ConceptPage.jsx';
+import CourseDetailPage from '../components/TripCard';
+
 
 // Dashboard Home Layout (moved into a component for better route handling)
 const DashboardHome = ({ theme, setTheme }) => (
@@ -107,8 +112,22 @@ const App = () => {
       <Router>
         <Routes>
           <Route path="/" element={<DashboardHome theme={theme} setTheme={setTheme} />} />
+          {/* <Route path="/" element={<CourseCarouselComponent />} /> */}
+          {/* <Route path="/course/:id" element={<CourseDetailPage />} />  */}
           <Route path="/concept1" element={<TopicCard />} />
           <Route path="/learningPage" element={<LearningPage />} />
+          <Route path="/what" element={<WhatPage />} />
+          <Route path="/why" element={<WhyPage />} />
+          <Route path="/concepts" element={<ConceptPage />} />
+
+          {/* <Route path="/" element={<Home />} />
+ 
+  <Route path="/why" element={<WhyPage />} />
+  <Route path="/concepts" element={<ConceptsPage />} />
+  <Route path="/solve" element={<SolveWithUsPage />} />
+  <Route path="/practice" element={<PracticePage />} /> */}
+
+
         </Routes>
       </Router>
     </ThemeProvider>

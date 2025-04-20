@@ -1,23 +1,17 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaUserCircle, FaArrowRight, FaArrowLeft } from "react-icons/fa";
+import { FaUserCircle, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 
-const LinearArrangementConcept1 = () => {
+const LinearArrangementConcept2 = () => {
   return (
     <div className="flex flex-col items-center mt-10">
       {/* Title */}
       <h2 className="text-xl font-bold mb-4">
-        Concept 1: Akash is sitting to the left of Prabhat
+       Akash is sitting to the right of Prabhat
       </h2>
 
       <div className="flex flex-col items-center">
         <div className="flex items-center space-x-10">
-          {/* Akash */}
-          <div className="flex flex-col items-center border-2 border-black px-6 py-3 rounded-xl text-lg font-bold">
-            <FaUserCircle className="text-3xl mb-1" />
-            Akash
-          </div>
-
           {/* Prabhat */}
           <div className="flex items-center space-x-4">
             <motion.div
@@ -43,6 +37,12 @@ const LinearArrangementConcept1 = () => {
               <FaArrowRight />
             </motion.div>
           </div>
+
+          {/* Akash */}
+          <div className="flex flex-col items-center border-2 border-black px-6 py-3 rounded-xl text-lg font-bold">
+            <FaUserCircle className="text-3xl mb-1" />
+            Akash
+          </div>
         </div>
 
         {/* Line Representation */}
@@ -52,4 +52,4 @@ const LinearArrangementConcept1 = () => {
   );
 };
 
-export default LinearArrangementConcept1;
+export default LinearArrangementConcept2;
