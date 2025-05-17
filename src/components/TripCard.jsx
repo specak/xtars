@@ -350,7 +350,7 @@ const cardsData = [
     description: 'Master algebra, geometry, calculus and more with visual examples and problems.',
     creator: 'MathGenius',
     img: 'https://cdn-icons-png.flaticon.com/512/564/564429.png',
-    route: '/maths',
+    route: '/quizLanding',
   },
   {
     title: 'Biology',
@@ -371,7 +371,7 @@ const cardsData = [
     description: 'Understand important aspects of accountancy like Assets, equities and Liabilites and alongside the important statements like balance sheet, Profit and loss etc..',
     creator: 'Skj',
     img: 'https://cdn-icons-png.flaticon.com/512/3135/3135783.png',
-    route: '/chemistry',
+    route: '/accountancyLanding',
   },
 ];
 

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { Banknote, Box, ReceiptText, Building2, Landmark } from 'lucide-react';
-import AssetTagsPage from './AssetIntroductionPage'
+import LiabilitiesIntroduction from './LiabilitiesIntroduction'
 
 /* Card Components */
 const Card = ({ children, className = '' }) => (
@@ -183,9 +183,9 @@ const AssetInfo = () => {
       <Tabs defaultValue="definition" onValueChange={setTab} className="w-full max-w-4xl mx-auto mb-6">
         <TabsList className="mb-6">
         <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="definition">What are Assets?</TabsTrigger>
-          <TabsTrigger value="types">Asset Types</TabsTrigger>
-          <TabsTrigger value="categories">Asset Categories</TabsTrigger>
+          <TabsTrigger value="definition">What are Liabilities?</TabsTrigger>
+          <TabsTrigger value="types">Liabilities Types</TabsTrigger>
+          <TabsTrigger value="categories">Liability Categories</TabsTrigger>
           <TabsTrigger value="quiz">Quiz</TabsTrigger>
         </TabsList>
 
@@ -193,20 +193,21 @@ const AssetInfo = () => {
         <TabsContent value="overview">
           <Section title="1. How about you?">
             <div className="flex flex-wrap justify-center">
-             <AssetTagsPage />
+             <LiabilitiesIntroduction />
             </div>
           </Section>
         </TabsContent>
 
         <TabsContent value="definition">
-          <Section title="2. What are Assets?">
+          <Section title="2. What are Liabilities?">
             <p className="text-lg dark:text-gray-200 text-gray-800 text-center mb-4">
-              Assets are resources owned by a business that have economic value. Examples include:
+            A liability is something that a person or company owes, usually a sum of money. It will be settled over time through the transfer 
+            of economic benefits including money, goods, or services
             </p>
             <div className="flex flex-wrap justify-center">
               <AssetCard
-                title="Examples of Assets"
-                examples={['Cash', 'Land', 'Inventory', 'Patents']}
+                title="Examples of Liabilities"
+                examples={['Loans', 'Bill Payables', 'Mortgages', 'Patents']}
                 icon={Landmark}
               />
             </div>
@@ -214,43 +215,38 @@ const AssetInfo = () => {
         </TabsContent>
 
         <TabsContent value="types">
-          <Section title="3. Types of Assets">
+          <Section title="3. Types of Liabilities">
             <div className="flex flex-wrap justify-center">
               <AssetCard
-                title="Cash"
-                examples={['Physical currency', 'Bank balances']}
+                title="Account Payables"
+                examples={['Bill Payables', 'dividend payables','Taxes']}
                 icon={Banknote}
               />
               <AssetCard
-                title="Inventory"
-                examples={['Raw materials', 'Finished goods']}
+                title="Loans"
+                examples={['Bank Loans', 'other loans']}
                 icon={Box}
               />
               <AssetCard
-                title="Receivables"
-                examples={['Customer invoices', 'Pending payments']}
+                title="Employee Payables"
+                examples={['Wages']}
                 icon={ReceiptText}
-              />
-              <AssetCard
-                title="Property & Equipment"
-                examples={['Land', 'Buildings', 'Machinery']}
-                icon={Building2}
               />
             </div>
           </Section>
         </TabsContent>
 
         <TabsContent value="categories">
-          <Section title="4. Asset Categories">
+          <Section title="4. Liability Categories Categories">
             <div className="flex flex-wrap justify-center">
               <AssetCard
-                title="Current Assets"
-                examples={['Receivables', 'Inventory']}
+                title="Current Liabilities - debts you owe within the next 12 months"
+                examples={['Wages', 'Short term Loans']}
                 icon={Box}
               />
               <AssetCard
-                title="Fixed Assets"
-                examples={['Land', 'Trademark', 'Brand Value']}
+                title="Long- Term Liabilities - long-term debt that ranges beyond 12 months"
+                examples={['Mortgages', 'Long term loans', 'Warranties']}
                 icon={Landmark}
               />
             </div>

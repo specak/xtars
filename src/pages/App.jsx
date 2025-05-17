@@ -19,6 +19,9 @@ import WhatPage from './LinearArrangement/WhatPage.jsx';
 import WhyPage from './LinearArrangement/WhyPage.jsx';
 import ConceptPage from './LinearArrangement/ConceptPage.jsx';
 import CourseDetailPage from '../components/TripCard';
+import Assets from './Accountancy/Assets.jsx'
+import AccountancyLanding from './Accountancy/AccountancyLanding.jsx';
+import QuizLanding from './QuizMode/Numeric.jsx'
 
 
 // Dashboard Home Layout (moved into a component for better route handling)
@@ -119,6 +122,10 @@ const App = () => {
           <Route path="/what" element={<WhatPage />} />
           <Route path="/why" element={<WhyPage />} />
           <Route path="/concepts" element={<ConceptPage />} />
+          <Route path="/accountancyLanding" element={<AccountancyLanding />} />
+          <Route path="/assets" element={<Assets />} />
+          <Route path = "/quizLanding" element = {<QuizLanding />} />
+       
 
           {/* <Route path="/" element={<Home />} />
  

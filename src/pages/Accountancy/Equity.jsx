@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useTheme } from 'next-themes';
 import { Banknote, Box, ReceiptText, Building2, Landmark } from 'lucide-react';
-import AssetTagsPage from './AssetIntroductionPage'
+import EquityOverview from './EquityOverview.jsx'
 
 /* Card Components */
 const Card = ({ children, className = '' }) => (
@@ -96,7 +96,7 @@ const AssetCard = ({ title, examples, icon: Icon }) => (
 );
 
 /* Main Component */
-const AssetInfo = () => {
+const Equity = () => {
   const { theme, setTheme } = useTheme();
   const [tab, setTab] = useState('definition');
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -105,30 +105,30 @@ const AssetInfo = () => {
 
   const questions = [
     {
-      question: 'Which of the following are fixed assets?',
-      options: ['Inventory', 'Cash', 'Land', 'Receivables'],
-      correct: 'Land',
-      explanation: 'Land is a long-term, non-liquid asset making it a fixed asset.',
+      question: 'You have bought a house worth 6,00,000. 5,00,000 you have borrowed from your friend and rest you have put your own money. What will be your equity?',
+      options: ['5,00,000', '6,00,000', '3,00,000', '1,00,000'],
+      correct: '1,00,000',
+      explanation: 'Total Equity = Total Asset - Total Liability.',
     },
     {
-      question: 'Inventory is what category of asset?',
-      options: ['Fixed asset', 'Current asset', 'Liability', 'Receivable'],
-      correct: 'Current asset',
+      question: 'Can Equity value ever be more than the asset value?',
+      options: ['True', 'False'],
+      correct: 'False',
       explanation:
-        'Inventory is a current asset as it is expected to be converted into cash within a year.',
-    },
-    {
-      question: 'Trademark is an example of what kind of asset?',
-      options: ['Fixed asset', 'Current asset', 'Inventory', 'Cash'],
-      correct: 'Fixed asset',
-      explanation: 'Trademarks are intangible fixed assets as they provide long-term value.',
-    },
-    {
-      question: 'Receivables fall under which asset category?',
-      options: ['Fixed asset', 'Current asset', 'Inventory', 'Liability'],
-      correct: 'Current asset',
-      explanation: 'Receivables are current assets as they are expected to be paid soon.',
-    },
+        'Equity can be equal to asset value but not more',
+    }
+    // {
+    //   question: 'Trademark is an example of what kind of asset?',
+    //   options: ['Fixed asset', 'Current asset', 'Inventory', 'Cash'],
+    //   correct: 'Fixed asset',
+    //   explanation: 'Trademarks are intangible fixed assets as they provide long-term value.',
+    // },
+    // {
+    //   question: 'Receivables fall under which asset category?',
+    //   options: ['Fixed asset', 'Current asset', 'Inventory', 'Liability'],
+    //   correct: 'Current asset',
+    //   explanation: 'Receivables are current assets as they are expected to be paid soon.',
+    // },
   ];
 
   const handleOptionClick = (option) => {
@@ -183,9 +183,9 @@ const AssetInfo = () => {
       <Tabs defaultValue="definition" onValueChange={setTab} className="w-full max-w-4xl mx-auto mb-6">
         <TabsList className="mb-6">
         <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="definition">What are Assets?</TabsTrigger>
-          <TabsTrigger value="types">Asset Types</TabsTrigger>
-          <TabsTrigger value="categories">Asset Categories</TabsTrigger>
+          <TabsTrigger value="definition">What is Equity?</TabsTrigger>
+          {/* <TabsTrigger value="types">Asset Types</TabsTrigger>
+          <TabsTrigger value="categories">Asset Categories</TabsTrigger> */}
           <TabsTrigger value="quiz">Quiz</TabsTrigger>
         </TabsList>
 
@@ -193,28 +193,35 @@ const AssetInfo = () => {
         <TabsContent value="overview">
           <Section title="1. How about you?">
             <div className="flex flex-wrap justify-center">
-             <AssetTagsPage />
+             <EquityOverview />
             </div>
           </Section>
         </TabsContent>
 
         <TabsContent value="definition">
-          <Section title="2. What are Assets?">
+          <Section title="2. What is Equity?">
             <p className="text-lg dark:text-gray-200 text-gray-800 text-center mb-4">
-              Assets are resources owned by a business that have economic value. Examples include:
+            Equity refers to the ownership in a company. For homeowners, home equity refers to the value of a property. </p>
+            <p className="text-lg dark:text-gray-200 text-gray-800 text-center mb-4">
+            If there is any liability then that you need to minus from the value of the company or the house whatever is in consideration </p>
+            <p className="text-lg dark:text-gray-200 text-gray-800 text-center mb-4">
+            Equity, is regarded as the sum of money that will be returned to the owner of a certain company if all of its assets are sold and the whole debt of that company is completely paid.
             </p>
-            <div className="flex flex-wrap justify-center">
+
+<p>Remember, Equity = Total Assets - Total Liabilities</p>
+
+            {/* <div className="flex flex-wrap justify-center">
               <AssetCard
                 title="Examples of Assets"
                 examples={['Cash', 'Land', 'Inventory', 'Patents']}
                 icon={Landmark}
               />
-            </div>
+            </div> */}
           </Section>
         </TabsContent>
 
-        <TabsContent value="types">
-          <Section title="3. Types of Assets">
+        {/* <TabsContent value="types">
+          <Section title="3. Types of Equity">
             <div className="flex flex-wrap justify-center">
               <AssetCard
                 title="Cash"
@@ -255,7 +262,7 @@ const AssetInfo = () => {
               />
             </div>
           </Section>
-        </TabsContent>
+        </TabsContent> */}
 
         <TabsContent value="quiz">
           <Section title={`5. Quiz: Question ${currentQuestion + 1} of ${questions.length}`}>
@@ -304,4 +311,4 @@ const AssetInfo = () => {
   );
 };
 
-export default AssetInfo;
+export default Equity;
