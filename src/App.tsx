@@ -24,7 +24,7 @@ import CoursesRouter from "./x-tars/courses/Router";
 export default function App() {
   return (
     <>
-      <Router>
+      <Router basename="xtars">
         <ScrollToTop />
         <Routes>
           {/* Dashboard Layout */}

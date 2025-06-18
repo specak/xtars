@@ -20,7 +20,7 @@ export default function UserDropdown() {
         className="flex items-center text-gray-700 dropdown-toggle dark:text-gray-400"
       >
         <span className="mr-3 overflow-hidden rounded-full h-11 w-11">
-          <img src="/images/grid-image/image-06.png" alt="User" />
+          <img src="/xtars/images/grid-image/image-06.png" alt="User" />
         </span>
 
         <span className="block mr-1 font-medium text-theme-sm">xTars</span>
