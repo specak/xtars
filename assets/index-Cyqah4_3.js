@@ -1,0 +1,1 @@
+import{j as t}from"./index-66KFhK6-.js";function e(){return t.jsx(t.Fragment,{children:t.jsx("div",{className:"text-lg text-gray-500 dark:text-gray-40",children:"📘 Accountancy Course"})})}export{e as default};
